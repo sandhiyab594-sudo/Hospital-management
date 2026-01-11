@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Prescriptions</h2>
+
+<form method="get" class="mb-3">
+    <input type="text" name="query" class="form-control" placeholder="Search by doctor or patient name">
+    <button type="submit" class="btn btn-info mt-2">Search</button>
+</form>
+
+<table class="table table-striped">
+<thead class="table-dark">
+<tr><th>ID</th><th>Doctor</th><th>Patient</th><th>Medicine</th><th>Dosage</th><th>Date</th><th>Actions</th></tr>
+</thead>
+<tbody>
+{% for p in prescriptions %}
+<tr>
+<td>{{ p.prescription_id }}</td>
+<td>{{ p.doctor.name }}</td>
+<td>{{ p.patient.name }}</td>
+<td>{{ p.medicine }}</td>
+<td>{{ p.dosage }}</td>
+<td>{{ p.date }}</td>
+<td>
+    <a href="{{ url_for('edit_prescription', id=p.prescription_id) }}" class="btn btn-warning btn-sm">Edit</a>
+    <a href="{{ url_for('delete_prescription', id=p.prescription_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<h3>Add Prescription</h3>
+<form method="POST" action="{{ url_for('add_prescription') }}">
+    <input type="number" class="form-control mb-2" name="doctor_id" placeholder="Doctor ID" required>
+    <input type="number" class="form-control mb-2" name="patient_id" placeholder="Patient ID" required>
+    <input type="text" class="form-control mb-2" name="medicine" placeholder="Medicine">
+    <input type="text" class="form-control mb-2" name="dosage" placeholder="Dosage">
+    <button type="submit" class="btn btn-success">Add Prescription</button>
+</form>
+{% endblock %}

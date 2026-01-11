@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Prescription</h2>
+<form method="POST">
+    <input type="number" class="form-control mb-2" name="doctor_id" value="{{ presc.doctor_id }}" required>
+    <input type="number" class="form-control mb-2" name="patient_id" value="{{ presc.patient_id }}" required>
+    <input type="text" class="form-control mb-2" name="medicine" value="{{ presc.medicine }}">
+    <input type="text" class="form-control mb-2" name="dosage" value="{{ presc.dosage }}">
+    <button type="submit" class="btn btn-primary">Update Prescription</button>
+    <a href="{{ url_for('prescriptions') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

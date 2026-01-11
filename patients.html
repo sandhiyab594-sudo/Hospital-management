@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Patients</h2>
+
+<form method="get" class="mb-3">
+    <input type="text" name="query" class="form-control" placeholder="Search patient by name">
+    <button type="submit" class="btn btn-info mt-2">Search</button>
+</form>
+
+<table class="table table-striped">
+<thead class="table-dark">
+<tr><th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Actions</th></tr>
+</thead>
+<tbody>
+{% for pat in patients %}
+<tr>
+<td>{{ pat.patient_id }}</td>
+<td>{{ pat.name }}</td>
+<td>{{ pat.age }}</td>
+<td>{{ pat.gender }}</td>
+<td>{{ pat.phone }}</td>
+<td>
+    <a href="{{ url_for('edit_patient', id=pat.patient_id) }}" class="btn btn-warning btn-sm">Edit</a>
+    <a href="{{ url_for('delete_patient', id=pat.patient_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<h3>Add Patient</h3>
+<form method="POST" action="{{ url_for('add_patient') }}">
+    <input type="text" class="form-control mb-2" name="name" placeholder="Name" required>
+    <input type="number" class="form-control mb-2" name="age" placeholder="Age">
+    <input type="text" class="form-control mb-2" name="gender" placeholder="Gender">
+    <input type="text" class="form-control mb-2" name="phone" placeholder="Phone">
+    <button type="submit" class="btn btn-success">Add Patient</button>
+</form>
+{% endblock %}

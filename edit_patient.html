@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Patient</h2>
+<form method="POST">
+    <input type="text" class="form-control mb-2" name="name" value="{{ patient.name }}" required>
+    <input type="number" class="form-control mb-2" name="age" value="{{ patient.age }}">
+    <input type="text" class="form-control mb-2" name="gender" value="{{ patient.gender }}">
+    <input type="text" class="form-control mb-2" name="phone" value="{{ patient.phone }}">
+    <button type="submit" class="btn btn-primary">Update Patient</button>
+    <a href="{{ url_for('patients') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
